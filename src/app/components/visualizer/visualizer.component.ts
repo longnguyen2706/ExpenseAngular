@@ -7,36 +7,15 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['./visualizer.component.less']
 })
 export class VisualizerComponent implements OnInit {
-  // single: any[];
-  // multi: any[];
-
-  // view: any[] = [700, 400];
  
-  // // options
-  // showXAxis = true;
-  // showYAxis = true;
-  // gradient = false;
-  // showLegend = true;
-  // showXAxisLabel = true;
-  // xAxisLabel = 'Country';
-  // showYAxisLabel = true;
-  // yAxisLabel = 'Population';
-
-  // colorScheme = {
-  //   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  // };
   chart = []; // This will hold our chart info
 
   constructor() {
-    // Object.assign(this, { single })
   }
 
   ngOnInit() {
   }
-  onSelect(event) {
-    console.log(event);
-  }
-
+  
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
   ];
