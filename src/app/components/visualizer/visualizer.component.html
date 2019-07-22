@@ -1,5 +1,5 @@
  <p>visualizer works!</p>
-<div class = "chart">
+<div class = "chart"  *ngIf="isDataAvailable">
 <canvas baseChart 
     [datasets]="chartData"
     [labels]="chartLabels"

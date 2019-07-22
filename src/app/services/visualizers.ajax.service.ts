@@ -6,9 +6,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DataEntity, Row, RowCell } from '../models/data-entity.model';
-import {map} from 'rxjs/operators';
-import { clearLine } from 'readline';
 import { of } from 'rxjs';
+import {map} from 'rxjs/operators';
 import { mockData } from '../resources/mock-data';
 
 
@@ -18,14 +17,29 @@ import { mockData } from '../resources/mock-data';
 export class VisualizerAjax {
     constructor(private http:HttpClient){};
     getSalesByYear(): Observable<ChartDataModel>{
-        // return this.http.get<DataEntity>(urlMapping.saleByYear).pipe(map(entity => {
-        //     let chartData: ChartDataModel = {
-        //         chartData: this.processRow(entity.rows),
-        //         chartLabels: entity.columns.map(c => c.label)
-        //     };
-        //     return chartData;
-        // }));
+        return this.http.get<DataEntity>(urlMapping.saleByYear).pipe(map(entity => {
+            let chartData: ChartDataModel = {
+                chartData: this.processRow(entity.rows),
+                chartLabels: entity.columns.map(c => c.label)
+            };
+            return chartData;
+        }));
 
+        
+    }
+
+    getQuantityByMonth(): Observable<ChartDataModel>{
+        return this.http.get<DataEntity>(urlMapping.quantityByMonth).pipe(map(entity => {
+            let chartData: ChartDataModel = {
+                chartData: this.processRow(entity.rows),
+                chartLabels: entity.columns.map(c => c.label)
+            };
+            return chartData;
+        }));
+
+    }
+
+    mock(): Observable<ChartDataModel>{
         return of( {
             chartData: this.processRow(mockData.rows),
             chartLabels: mockData.columns.map(c => c.label)

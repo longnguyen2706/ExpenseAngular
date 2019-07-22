@@ -10,19 +10,23 @@ import { TouchSequence } from 'selenium-webdriver';
   styleUrls: ['./visualizer.component.less']
 })
 export class VisualizerComponent implements OnInit {
- 
   chartData: ChartDataSets[];
   chartLabels: Label[];
   chartColors: Color[];
   chartLegend = true;
   chartType = 'line';
   chartPlugins = [];
+  isDataAvailable = false;
   constructor(private ajax: VisualizerAjax) {
   }
 
   ngOnInit() {
-    this.initChart()
-    this.ajax.getSalesByYear().subscribe(result => this.assignChartValue(result));
+   
+    this.ajax.getQuantityByMonth().subscribe(result => {
+      this.initChart();
+      this.assignChartValue(result);
+      this.isDataAvailable = true;
+    });
   }
 
   private initChart(){
