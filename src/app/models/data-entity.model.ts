@@ -5,11 +5,12 @@ export interface DataEntity{
 
 export interface Row{
     data: Array<RowCell>,
-    style?: String
+    style?: string,
+    label?: string
 }
 
 export interface RowCell{
-    v: string, // value 
+    v: number, // value 
     f: string // format
 }
 export interface ColumnHeader{

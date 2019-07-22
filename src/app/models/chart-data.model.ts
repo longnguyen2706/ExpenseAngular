@@ -1,7 +1,9 @@
-import { Label } from 'ng2-charts';
+import { Label, Color } from 'ng2-charts';
+import { ChartDataSets, ChartOptions } from 'chart.js';
 
 export interface ChartDataModel{
-   data: Array<any>,
-   dataLabel?: string,
-   labels: Array<Label>
+   chartData: ChartDataSets[],
+   chartLabels: Label[],
+   chartColors?: Color[],
+   chartOptions?: ChartOptions[]
 }
