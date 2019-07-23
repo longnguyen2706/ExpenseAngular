@@ -1,9 +1,10 @@
 import { ChartDataModel } from './../../models/chart-data.model';
 import { VisualizerAjax } from './../../services/visualizers.ajax.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
-import { TouchSequence } from 'selenium-webdriver';
+import { Color, Label, BaseChartDirective } from 'ng2-charts';
+import { TableData, MatTableData } from 'src/app/models/table-data.model';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-visualizer',
   templateUrl: './visualizer.component.html',
@@ -14,19 +15,25 @@ export class VisualizerComponent implements OnInit {
   chartLabels: Label[];
   chartColors: Color[];
   chartLegend = true;
-  chartType = 'line';
+  chartType = '';
   chartPlugins = [];
   isDataAvailable = false;
+  chartDataModel: ChartDataModel;
+
+  tableData: MatTableData;
   constructor(private ajax: VisualizerAjax) {
   }
-
+  @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
   ngOnInit() {
-   
-    this.ajax.getQuantityByMonth().subscribe(result => {
-      this.initChart();
-      this.assignChartValue(result);
-      this.isDataAvailable = true;
-    });
+    forkJoin(
+      this.ajax.getQuantityByMonth(),
+        this.ajax.getAllRecords()
+      ).subscribe(([r1, r2]) => {
+        this.chartDataModel =r1;
+        this.tableData = r2;
+        console.log(r2);
+        this.isDataAvailable = true;
+      });
   }
 
   private initChart(){
@@ -37,7 +44,7 @@ export class VisualizerComponent implements OnInit {
           },
         ];
       this.chartLegend = true;
-      this.chartType = 'line';
+      this.chartType = 'bar';
       this.chartPlugins = [];
   }
   private assignChartValue(c: ChartDataModel){
@@ -45,3 +52,4 @@ export class VisualizerComponent implements OnInit {
     this.chartLabels = c.chartLabels;
   }
 }
+;

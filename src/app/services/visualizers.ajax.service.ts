@@ -1,3 +1,4 @@
+import { MatTableData } from './../models/table-data.model';
 import { ChartDataSets } from 'chart.js';
 
 import { ChartDataModel } from './../models/chart-data.model';
@@ -39,6 +40,19 @@ export class VisualizerAjax {
 
     }
 
+    getAllRecords():Observable<MatTableData>{
+        return this.http.get<any>(urlMapping.allRecords).pipe(map(e =>{
+            let records: Array<any> = e['records']
+            let rows = [];
+            records.forEach (r => rows.push (r['fields']));
+            let data: MatTableData = {
+                cols: e['cols'],
+                rows: rows
+            }
+            return data;
+        }))
+    }
+
     mock(): Observable<ChartDataModel>{
         return of( {
             chartData: this.processRow(mockData.rows),
@@ -46,6 +60,7 @@ export class VisualizerAjax {
         })
     }
 
+    private sortRow 
     private processRow( rows: Array<Row>) : ChartDataSets[]{
         let chartData: Array<ChartDataSets> = [];
         rows.forEach(row => {

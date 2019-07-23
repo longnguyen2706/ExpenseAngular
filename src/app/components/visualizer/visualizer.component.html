@@ -1,12 +1,8 @@
- <p>visualizer works!</p>
-<div class = "chart"  *ngIf="isDataAvailable">
-<canvas baseChart 
-    [datasets]="chartData"
-    [labels]="chartLabels"
-    [options]="chartOptions"
-    [colors]="chartColors"
-    [legend]="chartLegend"
-    [chartType]="chartType"
-    [plugins]="chartPlugins">
-  </canvas>
+<p>visualizer works!</p>
+   
+<div *ngIf = "isDataAvailable">
+        <app-chart [data] = "chartDataModel"></app-chart>
+        <app-table [data] = "tableData" style="width:100%"></app-table>
 </div>
+
+
