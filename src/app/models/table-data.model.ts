@@ -1,11 +1,13 @@
+import { MatTableDataSource } from '@angular/material';
+
 export interface TableData{
     cols: Array<string>,
     rows: Array<Array<any>>
 }
 
 export interface MatTableData{
-    cols: Array<String>,
-    rows: Array<any>
+    cols: Array<string>,
+    rows: MatTableDataSource<any>
 }
 // export interface RecordData{
 //     cols: Array<String>,

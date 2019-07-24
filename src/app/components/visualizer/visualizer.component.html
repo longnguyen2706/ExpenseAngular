@@ -1,8 +1,11 @@
 <p>visualizer works!</p>
    
 <div *ngIf = "isDataAvailable">
-        <app-chart [data] = "chartDataModel"></app-chart>
+     
         <app-table [data] = "tableData" style="width:100%"></app-table>
+        <app-chart [data] = "chartDataModel"></app-chart>
+    
+      
 </div>
 
 
