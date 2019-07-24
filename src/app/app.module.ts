@@ -11,7 +11,8 @@ import { CommonModule } from "@angular/common";
 import { ChartComponent } from './components/chart/chart.component';
 import { TableComponent } from './components/table/table.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatTableModule} from '@angular/material';
+import {MatButtonModule, MatTableModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatListModule} from '@angular/material';
+import {FlexLayoutModule} from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,12 @@ import {MatButtonModule, MatTableModule} from '@angular/material';
     ChartsModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    FlexLayoutModule,
     
   ],
   providers: [],
