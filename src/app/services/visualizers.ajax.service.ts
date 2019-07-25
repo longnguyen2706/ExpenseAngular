@@ -26,9 +26,23 @@ export class VisualizerAjax {
             };
             return chartData;
         }));
-
-
     }
+
+    // getQuantityByProduct(): Observable<VisualizerData> {
+    //     return this.http.get<VisualizerEntity>(urlMapping.quantityByMonth).pipe(map(entity => {
+    //         let chart: ChartEntity = entity.chart;
+    //         let chartData: ChartDataModel = {
+    //             chartData: this.processRow(chart.rows),
+    //             chartLabels: chart.columns.map(c => c.label)
+    //         };
+    //         return {
+    //             chart: chartData,
+    //             table: entity.table
+    //         };
+    //     }
+    //     ));
+
+    // }
 
     getQuantityByMonth(): Observable<VisualizerData> {
         return this.http.get<VisualizerEntity>(urlMapping.quantityByMonth).pipe(map(entity => {

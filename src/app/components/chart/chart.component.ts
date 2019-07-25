@@ -1,5 +1,7 @@
+import { ChartSettingService } from './../../services/chart-setting.service';
+import { Label } from 'ng2-charts';
 import { Component, Input, OnInit } from '@angular/core';
-import { ChartOptions } from 'chart.js';
+import { ChartOptions, ChartType } from 'chart.js';
 import { ChartDataModel } from './../../models/chart-data.model';
 
 @Component({
@@ -8,60 +10,23 @@ import { ChartDataModel } from './../../models/chart-data.model';
   styleUrls: ['./chart.component.less']
 })
 export class ChartComponent implements OnInit {
-  chartColors = [
-    {
-      borderColor: 'black',
-      backgroundColor: 'rgba(255,0,0,0.3)',
-    },
-  ];
+  chartColors = [];
   chartLegend = true;
-  chartType = 'line';
+  chartType: ChartType = 'pie';
   chartPlugins = [];
-
-  chartOptions: (ChartOptions & { annotation: any }) = {
-    responsive: true,
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      xAxes: [{}],
-      yAxes: [
-        {
-          id: 'y-axis-0',
-          position: 'left',
-        },
-        {
-          id: 'y-axis-1',
-          position: 'right',
-          gridLines: {
-            color: 'rgba(255,0,0,0.3)',
-          },
-          ticks: {
-            fontColor: 'red',
-          }
-        }
-      ]
-    },
-    annotation: {
-      annotations: [
-        {
-          type: 'line',
-          mode: 'vertical',
-          scaleID: 'x-axis-0',
-          value: 'March',
-          borderColor: 'orange',
-          borderWidth: 2,
-          label: {
-            enabled: true,
-            fontColor: 'orange',
-            content: 'LineAnno'
-          }
-        },
-      ],
-    },
-  };
+  chartOptions: any ={};
+  
   @Input('data') data: ChartDataModel;
-  constructor() {
+  constructor(private chartSetting: ChartSettingService) {
   }
 
   ngOnInit() {
+    let len = this.data.chartLabels.length;
+
+    this.chartColors = this.chartSetting.getChartColors(this.chartType,len);
+    this.chartOptions = this.chartSetting.getChartOptions(this.chartType);
+  
   }
+
+ 
 }
