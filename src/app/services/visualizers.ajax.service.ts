@@ -3,21 +3,23 @@ import { Injectable } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DataEntity, Row, RowCell } from '../models/data-entity.model';
+import { ChartEntity, Row, RowCell } from '../models/chart-entity.model';
+import { MatTableData } from '../models/table-entity.model';
 import { mockData } from '../resources/mock-data';
 import { ChartDataModel } from './../models/chart-data.model';
-import { MatTableData } from './../models/table-data.model';
+import { VisualizerData } from './../models/visualizer-data.model';
+import { VisualizerEntity } from './../models/visualizer-entity.model';
 import { urlMapping } from './../resources/url';
-
 
 
 @Injectable({
     'providedIn': 'root',
 })
 export class VisualizerAjax {
-    constructor(private http:HttpClient){};
-    getSalesByYear(): Observable<ChartDataModel>{
-        return this.http.get<DataEntity>(urlMapping.saleByYear).pipe(map(entity => {
+    constructor(private http: HttpClient) { };
+
+    getSalesByYear(): Observable<ChartDataModel> {
+        return this.http.get<ChartEntity>(urlMapping.saleByYear).pipe(map(entity => {
             let chartData: ChartDataModel = {
                 chartData: this.processRow(entity.rows),
                 chartLabels: entity.columns.map(c => c.label)
@@ -25,25 +27,30 @@ export class VisualizerAjax {
             return chartData;
         }));
 
-        
+
     }
 
-    getQuantityByMonth(): Observable<ChartDataModel>{
-        return this.http.get<DataEntity>(urlMapping.quantityByMonth).pipe(map(entity => {
+    getQuantityByMonth(): Observable<VisualizerData> {
+        return this.http.get<VisualizerEntity>(urlMapping.quantityByMonth).pipe(map(entity => {
+            let chart: ChartEntity = entity.chart;
             let chartData: ChartDataModel = {
-                chartData: this.processRow(entity.rows),
-                chartLabels: entity.columns.map(c => c.label)
+                chartData: this.processRow(chart.rows),
+                chartLabels: chart.columns.map(c => c.label)
             };
-            return chartData;
-        }));
+            return {
+                chart: chartData,
+                table: entity.table
+            };
+        }
+        ));
 
     }
 
-    getAllRecords():Observable<MatTableData>{
-        return this.http.get<any>(urlMapping.allRecords).pipe(map(e =>{
+    getAllRecords(): Observable<MatTableData> {
+        return this.http.get<any>(urlMapping.allRecords).pipe(map(e => {
             let records: Array<any> = e['records']
             let row_data: Array<Object> = [];
-            records.forEach (r => row_data.push (r['fields']));
+            records.forEach(r => row_data.push(r['fields']));
             let data: MatTableData = {
                 cols: e['cols'],
                 rows: row_data
@@ -52,15 +59,14 @@ export class VisualizerAjax {
         }))
     }
 
-    mock(): Observable<ChartDataModel>{
-        return of( {
+    mock(): Observable<ChartDataModel> {
+        return of({
             chartData: this.processRow(mockData.rows),
             chartLabels: mockData.columns.map(c => c.label)
         })
     }
 
-    private sortRow 
-    private processRow( rows: Array<Row>) : ChartDataSets[]{
+    private processRow(rows: Array<Row>): ChartDataSets[] {
         let chartData: Array<ChartDataSets> = [];
         rows.forEach(row => {
             let data: ChartDataSets = {
@@ -72,7 +78,7 @@ export class VisualizerAjax {
         return chartData;
     }
 
-    private processCell (cell: RowCell){
+    private processCell(cell: RowCell) {
         return cell.v;
     }
 }

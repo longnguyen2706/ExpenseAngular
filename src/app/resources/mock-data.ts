@@ -1,5 +1,5 @@
-import { DataEntity } from './../models/data-entity.model';
-export const  mockData: DataEntity = 
+import { ChartEntity } from '../models/chart-entity.model';
+export const  mockData: ChartEntity = 
 {
 	"columns": [{
 		"id": "2014",

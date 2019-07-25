@@ -1,4 +1,4 @@
-export interface DataEntity{
+export interface ChartEntity{
     columns: Array<ColumnHeader>,
     rows: Array<Row>
 }

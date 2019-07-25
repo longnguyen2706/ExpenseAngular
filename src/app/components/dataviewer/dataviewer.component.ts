@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableData } from 'src/app/models/table-data.model';
+import { MatTableData } from 'src/app/models/table-entity.model';
 import { VisualizerAjax } from 'src/app/services/visualizers.ajax.service';
 
 @Component({
@@ -10,9 +10,7 @@ import { VisualizerAjax } from 'src/app/services/visualizers.ajax.service';
 export class DataviewerComponent implements OnInit {
   tableData: MatTableData;
   isDataAvailable = false;
-  height = "400px";
-  width = "90%";
-  
+
   constructor(private ajax: VisualizerAjax) { }
   
   ngOnInit() {

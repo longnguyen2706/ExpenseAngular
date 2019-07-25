@@ -1,7 +1,6 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { ChartOptions } from 'chart.js';
 import { ChartDataModel } from './../../models/chart-data.model';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { ChartDataSets } from 'chart.js';
-import { Label, Color, BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-chart',
@@ -9,42 +8,60 @@ import { Label, Color, BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./chart.component.less']
 })
 export class ChartComponent implements OnInit {
+  chartColors = [
+    {
+      borderColor: 'black',
+      backgroundColor: 'rgba(255,0,0,0.3)',
+    },
+  ];
+  chartLegend = true;
+  chartType = 'line';
+  chartPlugins = [];
 
-  // chartData: ChartDataSets[];
-  // chartLabels: Label[];
- 
- chartColors =  [
-            {
-              borderColor: 'black',
-              backgroundColor: 'rgba(255,0,0,0.3)',
-            },
-          ];
-        chartLegend = true;
-      chartType = 'line';
-      chartPlugins = [];
-
-  @Input ('data') data: ChartDataModel;
+  chartOptions: (ChartOptions & { annotation: any }) = {
+    responsive: true,
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      xAxes: [{}],
+      yAxes: [
+        {
+          id: 'y-axis-0',
+          position: 'left',
+        },
+        {
+          id: 'y-axis-1',
+          position: 'right',
+          gridLines: {
+            color: 'rgba(255,0,0,0.3)',
+          },
+          ticks: {
+            fontColor: 'red',
+          }
+        }
+      ]
+    },
+    annotation: {
+      annotations: [
+        {
+          type: 'line',
+          mode: 'vertical',
+          scaleID: 'x-axis-0',
+          value: 'March',
+          borderColor: 'orange',
+          borderWidth: 2,
+          label: {
+            enabled: true,
+            fontColor: 'orange',
+            content: 'LineAnno'
+          }
+        },
+      ],
+    },
+  };
+  @Input('data') data: ChartDataModel;
   constructor() {
   }
- 
-  ngOnInit(){
-    // this.initChart();
-    // this.assignChartValue();
-  }
 
-  // private initChart(){
-  //   this.chartColors =  [
-  //         {
-  //           borderColor: 'black',
-  //           backgroundColor: 'rgba(255,0,0,0.3)',
-  //         },
-  //       ];
-  //     this.chartLegend = true;
-  //     this.chartType = 'bar';
-  //     this.chartPlugins = [];
-  // }
-  // private assignChartValue(){
-  //   this.chartData = this.c.chartData;
-  //   this.chartLabels = this.c.chartLabels;
-  // }
+  ngOnInit() {
+  }
 }

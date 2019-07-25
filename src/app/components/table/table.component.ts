@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatTableData } from 'src/app/models/table-data.model';
+import { MatTableData } from 'src/app/models/table-entity.model';
 
 @Component({
   selector: 'app-table',
