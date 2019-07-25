@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { TableData, MatTableData } from 'src/app/models/table-data.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatTableData } from 'src/app/models/table-data.model';
 
 @Component({
   selector: 'app-table',
@@ -9,6 +9,9 @@ import { TableData, MatTableData } from 'src/app/models/table-data.model';
 export class TableComponent implements OnInit {
 
   @Input ('data') d: MatTableData;
+  @Input ('height') height: string = 'auto';
+  @Input ('width') width: string = '100%';
+
   constructor() { }
 
   ngOnInit() {

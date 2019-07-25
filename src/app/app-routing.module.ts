@@ -1,10 +1,12 @@
-import { VisualizerComponent } from './components/visualizer/visualizer.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { DataviewerComponent } from './components/dataviewer/dataviewer.component';
+import { VisualizerComponent } from './components/visualizer/visualizer.component';
 
 
 const routes: Routes = [
-  {path: 'dashboard', component: VisualizerComponent}
+  {path: 'dashboard', component: VisualizerComponent},
+  {path: 'dataviewer', component: DataviewerComponent}
 ];
 
 @NgModule({

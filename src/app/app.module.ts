@@ -13,12 +13,14 @@ import { TableComponent } from './components/table/table.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatTableModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatListModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { DataviewerComponent } from './components/dataviewer/dataviewer.component';
 @NgModule({
   declarations: [
     AppComponent,
     VisualizerComponent,
     ChartComponent,
     TableComponent,
+    DataviewerComponent,
 
   ],
   imports: [

@@ -1,15 +1,14 @@
-import { MatTableData } from './../models/table-data.model';
-import { ChartDataSets } from 'chart.js';
-
-import { ChartDataModel } from './../models/chart-data.model';
-import { urlMapping } from './../resources/url';
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ChartDataSets } from 'chart.js';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { DataEntity, Row, RowCell } from '../models/data-entity.model';
-import { of } from 'rxjs';
-import {map} from 'rxjs/operators';
 import { mockData } from '../resources/mock-data';
+import { ChartDataModel } from './../models/chart-data.model';
+import { MatTableData } from './../models/table-data.model';
+import { urlMapping } from './../resources/url';
+
 
 
 @Injectable({
@@ -43,11 +42,11 @@ export class VisualizerAjax {
     getAllRecords():Observable<MatTableData>{
         return this.http.get<any>(urlMapping.allRecords).pipe(map(e =>{
             let records: Array<any> = e['records']
-            let rows = [];
-            records.forEach (r => rows.push (r['fields']));
+            let row_data: Array<Object> = [];
+            records.forEach (r => row_data.push (r['fields']));
             let data: MatTableData = {
                 cols: e['cols'],
-                rows: rows
+                rows: row_data
             }
             return data;
         }))
