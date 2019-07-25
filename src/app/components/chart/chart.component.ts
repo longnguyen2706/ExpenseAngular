@@ -12,7 +12,7 @@ import { ChartDataModel } from './../../models/chart-data.model';
 export class ChartComponent implements OnInit {
   chartColors = [];
   chartLegend = true;
-  chartType: ChartType = 'pie';
+  chartType: ChartType = 'bar';
   chartPlugins = [];
   chartOptions: any ={};
   
@@ -22,10 +22,9 @@ export class ChartComponent implements OnInit {
 
   ngOnInit() {
     let len = this.data.chartLabels.length;
-
     this.chartColors = this.chartSetting.getChartColors(this.chartType,len);
     this.chartOptions = this.chartSetting.getChartOptions(this.chartType);
-  
+    this.chartPlugins = this.chartSetting.getChartPlugin(this.chartType);
   }
 
  

@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
+import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 @Injectable({
     'providedIn': 'root',
 })
 export class ChartSettingService {
 
-    private getRandomColors(len: number) {
-        let colors: Array<string> = [];
-        for (let i = 1; i <=len; i++) {
-            colors.push(this.rainbow(len, i));
-        }
-        return colors;
-    }
-
-    public getChartColors(chartType: ChartType, len: number){
-        switch(chartType){
+    public getChartColors(chartType: ChartType, len: number) {
+        switch (chartType) {
             case 'line':
                 return this.getLineChartColor(len);
             case 'bar':
@@ -26,40 +20,9 @@ export class ChartSettingService {
         }
     }
 
-    private getBarPiePolarChartColor(len: number){
-        let chartColors = [];
-
-        let colors = this.getRandomColors(len);
-      chartColors.push({
-        backgroundColor: colors
-      });
-    return chartColors;
-           
-    }
-
-    private getLineChartColor(len: number){
-        let chartColors = [];
-        let colors = this.getRandomColors(len);
-       colors.forEach(color => {
-            let rgb = this.hexToRgb(color);
-            chartColors.push(
-            { 
-                backgroundColor: 'rgba('.concat(rgb, ', 0.2)'),
-                borderColor: 'rgba('.concat(rgb, ', 1)'),
-                pointBackgroundColor: 'rgba('.concat(rgb, ', 0.9)'),
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgba('.concat(rgb, ', 0.7)'),
-              }
-            )
-            });
-            console.log(chartColors);
-       return chartColors;
-       
-    }
-    public getChartOptions(chartType: string){
-        switch(chartType){
-            case 'line': 
+    public getChartOptions(chartType: string) {
+        switch (chartType) {
+            case 'line':
                 return this.getLineChartOptions();
             case 'bar':
                 return this.getBarChartOptions();
@@ -67,9 +30,69 @@ export class ChartSettingService {
                 return this.getPieChartOptions();
             case 'polarArea':
                 return this.getPolarChartOptions();
-            default: 
+            default:
                 return [];
         }
+    }
+
+    public getChartPlugin(chartType: string) {
+        switch (chartType) {
+            case 'line':
+                return [pluginAnnotations];
+            case 'bar':
+                return [pluginDataLabels];
+            case 'pie':
+                return [pluginDataLabels];
+            case 'polarArea':
+                return [];
+            default:
+                return [];
+        }
+
+    }
+
+    private getRandomColors(len: number) {
+        let colors: Array<string> = [];
+        for (let i = 1; i <= len; i++) {
+            colors.push(this.rainbow(len, i));
+        }
+        return colors;
+    }
+
+    private getBarPiePolarChartColor(len: number) {
+        let chartColors = [];
+        let colors = this.getRandomColors(len);
+        chartColors.push({
+            backgroundColor: colors.map(c => this.getRgba(c, 0.5))
+        });
+        return chartColors;
+
+    }
+
+    private getRgba(hex, opacity) {
+        let rgb = this.hexToRgb(hex);
+        return 'rgba('.concat(rgb, ',', String(opacity) + ')');
+    }
+
+    private getLineChartColor(len: number) {
+        let chartColors = [];
+        let colors = this.getRandomColors(len);
+        colors.forEach(c => {
+
+            chartColors.push(
+                {
+                    backgroundColor: this.getRgba(c, 0.2),
+                    borderColor: this.getRgba(c, 1),
+                    pointBackgroundColor: this.getRgba(c, 0.9),
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: this.getRgba(c, 0.7),
+                }
+            )
+        });
+        console.log(chartColors);
+        return chartColors;
+
     }
 
     private rainbow(numOfSteps, step): string {
@@ -93,8 +116,8 @@ export class ChartSettingService {
         return c;
     }
     private hexToRgb(hex) {
-    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return  parseInt(result[1], 16) + ',' + parseInt(result[2], 16) + ',' + parseInt(result[3], 16);
+        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return parseInt(result[1], 16) + ',' + parseInt(result[2], 16) + ',' + parseInt(result[3], 16);
 
     }
 
@@ -144,19 +167,19 @@ export class ChartSettingService {
     }
 
     private getBarChartOptions() {
-     let barChartOptions: ChartOptions = {
+        let barChartOptions: ChartOptions = {
             responsive: true,
             // We use these empty structures as placeholders for dynamic theming.
             scales: { xAxes: [{}], yAxes: [{}] },
             plugins: {
-              datalabels: {
-                anchor: 'end',
-                align: 'end',
-              }
+                datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                }
             }
-          };
+        };
 
-          return barChartOptions;
+        return barChartOptions;
     }
 
     private getPieChartOptions() {
@@ -178,7 +201,7 @@ export class ChartSettingService {
         return pieChartOptions;
     }
 
-    private getPolarChartOptions(){
+    private getPolarChartOptions() {
         return [];
     }
 
