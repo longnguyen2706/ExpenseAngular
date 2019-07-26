@@ -1,3 +1,12 @@
 <p>visualform works!</p>
-<app-select [fieldOptions]="xFieldOptions" [(selected)] = "xField"></app-select>
-<p>You selected: {{xField}}</p>
+<div style="display: flex">
+    <app-select [fieldOptions]="xFieldOptions" [(selected)] = "xField" required="true"></app-select>
+    <app-select [fieldOptions]="xFuncOptions" [(selected)] = "xFunc" required="true"></app-select>
+    <app-select [fieldOptions]="yFieldOptions" [(selected)] = "yField" required="true"></app-select>
+    <app-select [fieldOptions]="yFuncOptions" [(selected)] = "yFunc" required="true"></app-select>
+</div>
+<p>You selected: {{xField}} {{xFunc}} {{yField}} {{yFunc}}</p>
+
+<div class="example-button-row">
+  <button mat-raised-button color="primary" (click) = "onBtnClick($event)" type="button">Primary</button>
+</div>

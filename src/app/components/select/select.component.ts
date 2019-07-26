@@ -9,6 +9,7 @@ export class SelectComponent implements OnInit, OnChanges {
  
   @Input('fieldOptions') fieldOptions;
   @Input ('selected') selected;
+  @Input ('required') required:boolean = false;
   @Output() selectedChange = new EventEmitter();
   constructor() { }
   

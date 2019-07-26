@@ -29,7 +29,16 @@ export class VisualformComponent implements OnInit {
   { value: 'a-2', label: 'c1' }];
 
   constructor() { }
+  
+  onBtnClick(){
+    if(!this.validateInput()){
+      alert("invalid");
+    }
+  }
 
+  validateInput(): boolean{
+    return this.xField && this.yField && this.xFunc && this.yFunc;
+  }
   ngOnInit() {
   }
 
