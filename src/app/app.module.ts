@@ -17,6 +17,7 @@ import { DataviewerComponent } from './components/dataviewer/dataviewer.componen
 import { DataprocessingComponent } from './components/dataprocessing/dataprocessing.component';
 import { SelectComponent } from './components/select/select.component';
 import {MatSelectModule} from '@angular/material/select';
+import { VisualformComponent } from './components/visualform/visualform.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import {MatSelectModule} from '@angular/material/select';
     DataviewerComponent,
     DataprocessingComponent,
     SelectComponent,
+    VisualformComponent,
 
   ],
   imports: [
