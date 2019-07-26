@@ -63,7 +63,7 @@ export class ChartSettingService {
         let chartColors = [];
         let colors = this.getRandomColors(len);
         chartColors.push({
-            backgroundColor: colors.map(c => this.getRgba(c, 0.5))
+            backgroundColor: colors.map(c => this.getRgba(c, 0.7))
         });
         return chartColors;
 

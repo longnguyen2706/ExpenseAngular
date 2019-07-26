@@ -1,8 +1,7 @@
-import { ChartSettingService } from './../../services/chart-setting.service';
-import { Label } from 'ng2-charts';
 import { Component, Input, OnInit } from '@angular/core';
-import { ChartOptions, ChartType } from 'chart.js';
+import { ChartType } from 'chart.js';
 import { ChartDataModel } from './../../models/chart-data.model';
+import { ChartSettingService } from './../../services/chart-setting.service';
 
 @Component({
   selector: 'app-chart',
@@ -12,7 +11,7 @@ import { ChartDataModel } from './../../models/chart-data.model';
 export class ChartComponent implements OnInit {
   chartColors = [];
   chartLegend = true;
-  chartType: ChartType = 'bar';
+  chartType: ChartType = 'line';
   chartPlugins = [];
   chartOptions: any ={};
   

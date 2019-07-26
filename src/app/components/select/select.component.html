@@ -1,0 +1,12 @@
+<p>select works!</p>
+<h4>Basic mat-select</h4>
+<mat-form-field>
+  <mat-label>Favorite food</mat-label>
+  <mat-select [(value)]="selected">
+    <mat-option *ngFor="let field of fields" [value]="field.value">
+      {{field.label}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<p>You selected: {{selected}}</p>

@@ -11,9 +11,12 @@ import { CommonModule } from "@angular/common";
 import { ChartComponent } from './components/chart/chart.component';
 import { TableComponent } from './components/table/table.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatTableModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatListModule} from '@angular/material';
+import {MatButtonModule, MatTableModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatListModule, MatLabel} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { DataviewerComponent } from './components/dataviewer/dataviewer.component';
+import { DataprocessingComponent } from './components/dataprocessing/dataprocessing.component';
+import { SelectComponent } from './components/select/select.component';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +24,8 @@ import { DataviewerComponent } from './components/dataviewer/dataviewer.componen
     ChartComponent,
     TableComponent,
     DataviewerComponent,
+    DataprocessingComponent,
+    SelectComponent,
 
   ],
   imports: [
@@ -38,6 +43,7 @@ import { DataviewerComponent } from './components/dataviewer/dataviewer.componen
     MatIconModule,
     MatListModule,
     FlexLayoutModule,
+    MatSelectModule
     
   ],
   providers: [],
