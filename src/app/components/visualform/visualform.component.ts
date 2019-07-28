@@ -1,15 +1,6 @@
 import { VisualFormEntity } from "./../../models/visual-form.entity.model";
 import { FormOption } from "./../../models/form-value.model";
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  ChangeDetectorRef,
-  Input,
-  OnChanges,
-  SimpleChanges
-} from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { FormValue } from "src/app/models/form-value.model";
 
 @Component({
@@ -18,26 +9,31 @@ import { FormValue } from "src/app/models/form-value.model";
   styleUrls: ["./visualform.component.less"]
 })
 export class VisualformComponent implements OnInit {
-  xField: any;
-  yField: any;
-  xFunc: any;
-  yFunc: any;
-
   @Input("initialValue") initialVal: FormValue;
   @Input("formEntity") formEntity: VisualFormEntity;
   @Output() formValue: EventEmitter<FormValue> = new EventEmitter<FormValue>();
 
-  xFieldOptions;
-  yFieldOptions;
-  xFuncOptions;
-  yFuncOptions;
+  xField: any;
+  yField: any;
+  xFunc: any;
+  yFunc: any;
+  xFieldOptions: Array<FormOption>;
+  yFieldOptions: Array<FormOption>;
+  xFuncOptions: Array<FormOption>;
+  yFuncOptions: Array<FormOption>;
 
   constructor() {}
 
   onXFieldChange(xField) {
-    console.log(xField);
     this.xFuncOptions = this.formEntity.fieldFuncMap.get(this.xField);
+    this.xFunc = null;
   }
+
+  onYFieldChange(yField) {
+    this.yFuncOptions = this.formEntity.fieldFuncMap.get(this.yField);
+    this.yFunc = null;
+  }
+
   onBtnClick() {
     if (!this.validateInput()) {
       alert("Invalid input!");
@@ -52,7 +48,10 @@ export class VisualformComponent implements OnInit {
   }
 
   validateInput(): boolean {
-    return this.xField && this.yField && this.xFunc && this.yFunc;
+    let isNotNull: boolean =
+      this.xField && this.yField && this.xFunc && this.yFunc;
+    let isNotDuplicate: boolean = this.xField !== this.yField;
+    return isNotNull && isNotDuplicate;
   }
   ngOnInit() {
     this.xFieldOptions = this.yFieldOptions = this.formEntity.fieldOptions;

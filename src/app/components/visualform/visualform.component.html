@@ -15,6 +15,7 @@
   <app-select
     [fieldOptions]="yFieldOptions"
     [(selected)]="yField"
+    (selectedChange)="onYFieldChange($event)"
     required="true"
   ></app-select>
 
