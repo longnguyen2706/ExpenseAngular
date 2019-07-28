@@ -1,3 +1,4 @@
+import { VisualizerAjax } from "./../../services/visualizers.ajax.service";
 import { CheckboxTableComponent } from "./../checkbox-table/checkbox-table.component";
 import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { MatTableData } from "./../../models/table-entity.model";
@@ -13,11 +14,12 @@ export class DataprocessingComponent implements OnInit, AfterViewInit {
   formInitialValue: FormValue;
   formEntity: VisualFormEntity;
   tableData: MatTableData;
+  isDataAvailable: boolean = false;
 
   @ViewChild(CheckboxTableComponent, { static: false })
   checkboxTable: CheckboxTableComponent;
 
-  constructor() {}
+  constructor(private ajaxService: VisualizerAjax) {}
 
   ngOnInit() {
     this.initTable();
@@ -32,31 +34,43 @@ export class DataprocessingComponent implements OnInit, AfterViewInit {
     this.tableData.rows = this.checkboxTable.removeSelected();
   }
 
+  onBtnPlot() {
+    console.log(this.tableData.rows);
+    this.ajaxService
+      .plotChart(this.tableData.rows)
+      .subscribe(r => console.log(r));
+  }
+
   private initForm() {
-    this.formEntity = {
-      fieldOptions: [
-        { value: "steak-0", label: "Steak" },
-        { value: "pizza-1", label: "Pizza" }
-      ],
-      fieldFuncMap: new Map([
-        [
-          "steak-0",
-          [
-            { value: "a", label: "a" },
-            { value: "b", label: "b" },
-            { value: "c", label: "c" }
-          ]
-        ],
-        [
-          "pizza-1",
-          [
-            { value: "d", label: "d" },
-            { value: "e", label: "e" },
-            { value: "f", label: "f" }
-          ]
-        ]
-      ])
-    };
+    // this.formEntity = {
+    //   fieldOptions: [
+    //     { value: "steak-0", label: "Steak" },
+    //     { value: "pizza-1", label: "Pizza" }
+    //   ],
+    //   fieldFuncMap: new Map([
+    //     [
+    //       "steak-0",
+    //       [
+    //         { value: "a", label: "a" },
+    //         { value: "b", label: "b" },
+    //         { value: "c", label: "c" }
+    //       ]
+    //     ],
+    //     [
+    //       "pizza-1",
+    //       [
+    //         { value: "d", label: "d" },
+    //         { value: "e", label: "e" },
+    //         { value: "f", label: "f" }
+    //       ]
+    //     ]
+    //   ])
+    // };
+    this.ajaxService.getVisualForm().subscribe(r => {
+      this.formEntity = r;
+      console.log(r);
+      this.isDataAvailable = true;
+    });
     this.formInitialValue = {
       xField: "steak-0",
       xFunc: "a",
