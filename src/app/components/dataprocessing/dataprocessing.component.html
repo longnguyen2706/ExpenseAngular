@@ -31,3 +31,9 @@
     </button>
   </div>
 </div>
+
+<div *ngIf="isChartAvailable">
+  <ng-container *ngFor="let chart of charts">
+    <app-chart [data]="chart"></app-chart>
+  </ng-container>
+</div>

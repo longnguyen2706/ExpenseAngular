@@ -1,3 +1,4 @@
+import { ChartDataModel } from "./../../models/chart-data.model";
 import { VisualizerAjax } from "./../../services/visualizers.ajax.service";
 import { CheckboxTableComponent } from "./../checkbox-table/checkbox-table.component";
 import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
@@ -16,6 +17,9 @@ export class DataprocessingComponent implements OnInit, AfterViewInit {
   tableData: MatTableData;
   isDataAvailable: boolean = false;
 
+  charts: Array<ChartDataModel> = [];
+  isChartAvailable: boolean = false;
+
   @ViewChild(CheckboxTableComponent, { static: false })
   checkboxTable: CheckboxTableComponent;
 
@@ -25,6 +29,7 @@ export class DataprocessingComponent implements OnInit, AfterViewInit {
     this.initTable();
     this.initForm();
   }
+
   ngAfterViewInit(): void {}
   onFormValue(val: FormValue) {
     this.tableData = this.newTableData(val);
@@ -36,36 +41,13 @@ export class DataprocessingComponent implements OnInit, AfterViewInit {
 
   onBtnPlot() {
     console.log(this.tableData.rows);
-    this.ajaxService
-      .plotChart(this.tableData.rows)
-      .subscribe(r => console.log(r));
+    this.ajaxService.plotChart(this.tableData.rows).subscribe(data => {
+      this.charts = data.map(d => d.chart);
+      this.isChartAvailable = true;
+    });
   }
 
   private initForm() {
-    // this.formEntity = {
-    //   fieldOptions: [
-    //     { value: "steak-0", label: "Steak" },
-    //     { value: "pizza-1", label: "Pizza" }
-    //   ],
-    //   fieldFuncMap: new Map([
-    //     [
-    //       "steak-0",
-    //       [
-    //         { value: "a", label: "a" },
-    //         { value: "b", label: "b" },
-    //         { value: "c", label: "c" }
-    //       ]
-    //     ],
-    //     [
-    //       "pizza-1",
-    //       [
-    //         { value: "d", label: "d" },
-    //         { value: "e", label: "e" },
-    //         { value: "f", label: "f" }
-    //       ]
-    //     ]
-    //   ])
-    // };
     this.ajaxService.getVisualForm().subscribe(r => {
       this.formEntity = r;
       console.log(r);
