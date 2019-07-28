@@ -18,6 +18,7 @@ import { DataprocessingComponent } from './components/dataprocessing/dataprocess
 import { SelectComponent } from './components/select/select.component';
 import {MatSelectModule} from '@angular/material/select';
 import { VisualformComponent } from './components/visualform/visualform.component';
+import { FieldsettingComponent } from './components/fieldsetting/fieldsetting.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { VisualformComponent } from './components/visualform/visualform.componen
     DataprocessingComponent,
     SelectComponent,
     VisualformComponent,
+    FieldsettingComponent,
 
   ],
   imports: [
