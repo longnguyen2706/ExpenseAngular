@@ -4,3 +4,8 @@ export interface FormValue {
   yField: string;
   yFunc: string;
 }
+
+export interface FormOption {
+  label: string;
+  value: string;
+}
