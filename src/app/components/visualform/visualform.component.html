@@ -1,38 +1,46 @@
-<div style="display: flex">
-  <app-select
-    [fieldOptions]="xFieldOptions"
-    [(selected)]="xField"
-    (selectedChange)="onXFieldChange($event)"
-    required="true"
-  ></app-select>
+<div class="form-content">
+  <div class="select-wrap">
+    <app-select
+      [fieldOptions]="xFieldOptions"
+      [(selected)]="xField"
+      (selectedChange)="onXFieldChange($event)"
+      required="true"
+    ></app-select>
+  </div>
 
-  <app-select
-    [fieldOptions]="xFuncOptions"
-    [(selected)]="xFunc"
-    required="true"
-  ></app-select>
+  <div class="select-wrap">
+    <app-select
+      [fieldOptions]="xFuncOptions"
+      [(selected)]="xFunc"
+      required="true"
+    ></app-select>
+  </div>
 
-  <app-select
-    [fieldOptions]="yFieldOptions"
-    [(selected)]="yField"
-    (selectedChange)="onYFieldChange($event)"
-    required="true"
-  ></app-select>
+  <div class="select-wrap">
+    <app-select
+      [fieldOptions]="yFieldOptions"
+      [(selected)]="yField"
+      (selectedChange)="onYFieldChange($event)"
+      required="true"
+    ></app-select>
+  </div>
 
-  <app-select
-    [fieldOptions]="yFuncOptions"
-    [(selected)]="yFunc"
-    required="true"
-  ></app-select>
-</div>
+  <div class="select-wrap">
+    <app-select
+      [fieldOptions]="yFuncOptions"
+      [(selected)]="yFunc"
+      required="true"
+    ></app-select>
+  </div>
 
-<div class="example-button-row">
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="onBtnClick($event)"
-    type="button"
-  >
-    Primary
-  </button>
+  <div class="btn-wrap">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onBtnClick($event)"
+      type="button"
+    >
+      Add
+    </button>
+  </div>
 </div>
