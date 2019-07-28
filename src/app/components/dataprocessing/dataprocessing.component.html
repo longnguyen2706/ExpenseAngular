@@ -1,11 +1,32 @@
 <p>dataprocessing works!</p>
 <app-visualform
-  (formValue)="getFormValue($event)"
+  (formValue)="onFormValue($event)"
   [initialValue]="formInitialValue"
   [formEntity]="formEntity"
 ></app-visualform>
+
 <app-checkbox-table
   [data]="tableData"
-  width="auto"
+  width="100%"
   height="auto"
 ></app-checkbox-table>
+
+<div class="btn-row">
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="onBtnRemove($event)"
+    type="button"
+  >
+    Remove
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onBtnSend($event)"
+    type="button"
+  >
+    Plot
+  </button>
+</div>

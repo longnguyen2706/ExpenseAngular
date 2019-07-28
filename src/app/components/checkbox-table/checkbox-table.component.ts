@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { SelectionModel } from "@angular/cdk/collections";
 import { MatTableData } from "src/app/models/table-entity.model";
 
@@ -11,6 +11,7 @@ export class CheckboxTableComponent implements OnInit {
   @Input("data") d: MatTableData;
   @Input("height") height: string = "auto";
   @Input("width") width: string = "100%";
+
   selection = new SelectionModel<any>(true, []);
   columnsToDisplay = [];
   constructor() {}
@@ -43,5 +44,18 @@ export class CheckboxTableComponent implements OnInit {
     return `${
       this.selection.isSelected(row) ? "deselect" : "select"
     } row ${row.position + 1}`;
+  }
+
+  public removeSelected() {
+    let nonSelectedRows = [];
+    this.d.rows.forEach(row => {
+      if (!this.selection.isSelected(row)) {
+        nonSelectedRows.push(row);
+      }
+    });
+    // clear selected
+    this.selection.clear();
+    this.d.rows = nonSelectedRows;
+    return nonSelectedRows;
   }
 }

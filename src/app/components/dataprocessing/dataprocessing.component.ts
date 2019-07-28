@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { CheckboxTableComponent } from "./../checkbox-table/checkbox-table.component";
+import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { MatTableData } from "./../../models/table-entity.model";
 import { FormValue } from "src/app/models/form-value.model";
 import { VisualFormEntity } from "src/app/models/visual-form.entity.model";
@@ -8,20 +9,27 @@ import { VisualFormEntity } from "src/app/models/visual-form.entity.model";
   templateUrl: "./dataprocessing.component.html",
   styleUrls: ["./dataprocessing.component.less"]
 })
-export class DataprocessingComponent implements OnInit {
+export class DataprocessingComponent implements OnInit, AfterViewInit {
   formInitialValue: FormValue;
   formEntity: VisualFormEntity;
-
   tableData: MatTableData;
+
+  @ViewChild(CheckboxTableComponent, { static: false })
+  checkboxTable: CheckboxTableComponent;
+
   constructor() {}
 
   ngOnInit() {
     this.initTable();
     this.initForm();
   }
-
-  getFormValue(val: FormValue) {
+  ngAfterViewInit(): void {}
+  onFormValue(val: FormValue) {
     this.tableData = this.newTableData(val);
+  }
+
+  onBtnRemove() {
+    this.tableData.rows = this.checkboxTable.removeSelected();
   }
 
   private initForm() {
