@@ -1,32 +1,73 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableData } from './../../models/table-entity.model';
+import { Component, OnInit } from "@angular/core";
+import { MatTableData } from "./../../models/table-entity.model";
+import { FormValue } from "src/app/models/form-value.model";
+import { VisualFormEntity } from "src/app/models/visual-form.entity.model";
 
 @Component({
-  selector: 'app-dataprocessing',
-  templateUrl: './dataprocessing.component.html',
-  styleUrls: ['./dataprocessing.component.less']
+  selector: "app-dataprocessing",
+  templateUrl: "./dataprocessing.component.html",
+  styleUrls: ["./dataprocessing.component.less"]
 })
 export class DataprocessingComponent implements OnInit {
+  formInitialValue: FormValue;
+  formEntity: VisualFormEntity;
 
-  tableData: MatTableData = {
-    cols: ['select', 'position', 'name', 'weight', 'symbol'],
-    rows: [
-      {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-      {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-      {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-      {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-      {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-      {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-      {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-      {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-      {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-      {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-    ]
-
-  };
-  constructor() { }
+  tableData: MatTableData;
+  constructor() {}
 
   ngOnInit() {
+    this.initTable();
+    this.initForm();
   }
 
+  getFormValue(val: FormValue) {
+    this.tableData = this.newTableData(val);
+  }
+
+  private initForm() {
+    this.formEntity = {
+      fieldOptions: [
+        { value: "steak-0", label: "Steak" },
+        { value: "pizza-1", label: "Pizza" }
+      ],
+      fieldFuncMap: new Map([
+        [
+          "steak-0",
+          [
+            { value: "a", label: "a" },
+            { value: "b", label: "b" },
+            { value: "c", label: "c" }
+          ]
+        ],
+        [
+          "pizza-1",
+          [
+            { value: "d", label: "d" },
+            { value: "e", label: "e" },
+            { value: "f", label: "f" }
+          ]
+        ]
+      ])
+    };
+    this.formInitialValue = {
+      xField: "steak-0",
+      xFunc: "a",
+      yField: "pizza-1",
+      yFunc: "d"
+    };
+  }
+
+  private initTable() {
+    this.tableData = {
+      cols: ["xField", "xFunc", "yField", "yFunc"],
+      rows: []
+    };
+  }
+  private newTableData(val: FormValue) {
+    let newData = {
+      cols: this.tableData.cols,
+      rows: [...this.tableData.rows, val]
+    };
+    return newData;
+  }
 }

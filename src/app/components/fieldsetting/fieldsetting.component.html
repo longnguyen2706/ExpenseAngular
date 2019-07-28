@@ -1,0 +1,13 @@
+<div style="display: flex">
+  <app-select
+    [fieldOptions]="xFieldOptions"
+    [(selected)]="xField"
+    required="true"
+  ></app-select>
+  <app-select
+    [fieldOptions]="xFuncOptions"
+    [(selected)]="xFunc"
+    required="true"
+  ></app-select>
+</div>
+<p>You selected: {{ xField }} {{ xFunc }}</p>

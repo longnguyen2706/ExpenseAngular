@@ -1,3 +1,7 @@
 <p>dataprocessing works!</p>
-<app-visualform></app-visualform>
-<app-table [data] = "tableData" width="auto" height= "auto"></app-table>  
+<app-visualform
+  (formValue)="getFormValue($event)"
+  [initialValue]="formInitialValue"
+  [formEntity]="formEntity"
+></app-visualform>
+<app-table [data]="tableData" width="auto" height="auto"></app-table>
