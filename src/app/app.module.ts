@@ -1,24 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { VisualizerComponent } from './components/visualizer/visualizer.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ChartsModule } from 'ng2-charts';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HttpClientModule } from "@angular/common/http";
+import { VisualizerComponent } from "./components/visualizer/visualizer.component";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { ChartsModule } from "ng2-charts";
 import { CommonModule } from "@angular/common";
-import { ChartComponent } from './components/chart/chart.component';
-import { TableComponent } from './components/table/table.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatTableModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatListModule, MatLabel} from '@angular/material';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import { DataviewerComponent } from './components/dataviewer/dataviewer.component';
-import { DataprocessingComponent } from './components/dataprocessing/dataprocessing.component';
-import { SelectComponent } from './components/select/select.component';
-import {MatSelectModule} from '@angular/material/select';
-import { VisualformComponent } from './components/visualform/visualform.component';
-import { FieldsettingComponent } from './components/fieldsetting/fieldsetting.component';
+import { ChartComponent } from "./components/chart/chart.component";
+import { TableComponent } from "./components/table/table.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {
+  MatButtonModule,
+  MatTableModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatListModule,
+  MatLabel,
+  MatCheckboxModule
+} from "@angular/material";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { DataviewerComponent } from "./components/dataviewer/dataviewer.component";
+import { DataprocessingComponent } from "./components/dataprocessing/dataprocessing.component";
+import { SelectComponent } from "./components/select/select.component";
+import { MatSelectModule } from "@angular/material/select";
+import { VisualformComponent } from "./components/visualform/visualform.component";
+import { FieldsettingComponent } from "./components/fieldsetting/fieldsetting.component";
+import { CheckboxTableComponent } from './components/checkbox-table/checkbox-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +40,7 @@ import { FieldsettingComponent } from './components/fieldsetting/fieldsetting.co
     SelectComponent,
     VisualformComponent,
     FieldsettingComponent,
-
+    CheckboxTableComponent
   ],
   imports: [
     BrowserModule,
@@ -47,10 +57,10 @@ import { FieldsettingComponent } from './components/fieldsetting/fieldsetting.co
     MatIconModule,
     MatListModule,
     FlexLayoutModule,
-    MatSelectModule
-    
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
