@@ -23,6 +23,14 @@ export class TableComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     console.log("data table changed");
+    this.refresh();
+  }
+
+  public refresh() {
     this.changeDetectorRefs.detectChanges();
+  }
+  public reRender(d: MatTableData) {
+    this.d = d;
+    this.refresh();
   }
 }

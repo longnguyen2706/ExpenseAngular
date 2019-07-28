@@ -17,11 +17,14 @@ export class DataprocessingComponent implements OnInit {
   ngOnInit() {}
 
   getFormValue(val: FormValue) {
-    // this.tableData.rows.push(val);
-    this.tableData = {
-      cols: ["xField", "xFunc", "yField", "yFunc"],
-      rows: [val]
+    this.tableData = this.newTableData(val);
+  }
+
+  private newTableData(val: FormValue) {
+    let newData = {
+      cols: this.tableData.cols,
+      rows: [...this.tableData.rows, val]
     };
-    console.log(this.tableData.rows);
+    return newData;
   }
 }

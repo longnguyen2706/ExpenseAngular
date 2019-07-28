@@ -47,7 +47,7 @@ export class VisualformComponent implements OnInit {
 
   onBtnClick() {
     if (!this.validateInput()) {
-      alert("invalid");
+      alert("Invalid input!");
     } else {
       this.formValue.emit({
         xField: this.xField,
