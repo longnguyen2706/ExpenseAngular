@@ -14,6 +14,7 @@ export class ChartComponent implements OnInit {
   chartType: ChartType = "bar";
   chartPlugins = [];
   chartOptions: any = {};
+  types: Array<ChartType> = ["bar", "line", "pie", "polarArea"];
 
   @Input("data") data: ChartDataModel;
   constructor(private chartSetting: ChartSettingService) {}
