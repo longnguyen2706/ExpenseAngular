@@ -11,16 +11,14 @@
         </tr>
     </table> -->
   <mat-table [dataSource]="d['rows']">
-    <p>debug</p>
-    {{ d | json }}
     <ng-container [matColumnDef]="column" *ngFor="let column of d['cols']">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ column }}
+      </th>
       <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="d['cols']"></tr>
     <tr mat-row *matRowDef="let row; columns: d['cols']"></tr>
   </mat-table>
-
-  <p>{{ d.rows | json }}</p>
 </div>
