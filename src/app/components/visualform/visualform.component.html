@@ -5,6 +5,8 @@
       [(selected)]="xField"
       (selectedChange)="onXFieldChange($event)"
       required="true"
+      title="X-axis field"
+      label="Choose field"
     ></app-select>
   </div>
 
@@ -13,6 +15,8 @@
       [fieldOptions]="xFuncOptions"
       [(selected)]="xFunc"
       required="true"
+      title="X-axis function"
+      label="Choose processing function"
     ></app-select>
   </div>
 
@@ -22,6 +26,8 @@
       [(selected)]="yField"
       (selectedChange)="onYFieldChange($event)"
       required="true"
+      title="Y-axis field"
+      label="Choose field"
     ></app-select>
   </div>
 
@@ -30,6 +36,8 @@
       [fieldOptions]="yFuncOptions"
       [(selected)]="yFunc"
       required="true"
+      title="Y-axis function"
+      label="Choose processing function"
     ></app-select>
   </div>
 
