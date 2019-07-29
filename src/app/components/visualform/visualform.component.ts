@@ -25,12 +25,12 @@ export class VisualformComponent implements OnInit {
   constructor() {}
 
   onXFieldChange(xField) {
-    this.xFuncOptions = this.formEntity.fieldFuncMap[this.xField];
+    this.xFuncOptions = this.formEntity.xFieldFuncMap[this.xField];
     this.xFunc = null;
   }
 
   onYFieldChange(yField) {
-    this.yFuncOptions = this.formEntity.fieldFuncMap[this.yField];
+    this.yFuncOptions = this.formEntity.yFieldFuncMap[this.yField];
     this.yFunc = null;
   }
 
@@ -57,7 +57,7 @@ export class VisualformComponent implements OnInit {
     this.xFieldOptions = this.yFieldOptions = this.formEntity.fieldOptions;
     this.xField = this.initialVal.xField;
     this.yField = this.initialVal.yField;
-    this.xFuncOptions = this.formEntity.fieldFuncMap[this.xField];
-    this.yFuncOptions = this.formEntity.fieldFuncMap[this.yField];
+    this.xFuncOptions = this.formEntity.xFieldFuncMap[this.xField];
+    this.yFuncOptions = this.formEntity.yFieldFuncMap[this.yField];
   }
 }
