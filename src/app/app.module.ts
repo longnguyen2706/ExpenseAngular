@@ -21,6 +21,8 @@ import {
   MatLabel,
   MatCheckboxModule
 } from "@angular/material";
+
+import { MatGridListModule } from "@angular/material/grid-list";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { DataviewerComponent } from "./components/dataviewer/dataviewer.component";
 import { DataprocessingComponent } from "./components/dataprocessing/dataprocessing.component";
@@ -28,7 +30,7 @@ import { SelectComponent } from "./components/select/select.component";
 import { MatSelectModule } from "@angular/material/select";
 import { VisualformComponent } from "./components/visualform/visualform.component";
 import { FieldsettingComponent } from "./components/fieldsetting/fieldsetting.component";
-import { CheckboxTableComponent } from './components/checkbox-table/checkbox-table.component';
+import { CheckboxTableComponent } from "./components/checkbox-table/checkbox-table.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +60,8 @@ import { CheckboxTableComponent } from './components/checkbox-table/checkbox-tab
     MatListModule,
     FlexLayoutModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
