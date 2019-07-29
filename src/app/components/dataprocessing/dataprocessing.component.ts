@@ -19,7 +19,7 @@ export class DataprocessingComponent implements OnInit, AfterViewInit {
 
   charts: Array<ChartDataModel> = [];
   isChartAvailable: boolean = false;
-
+  isLoading = false;
   @ViewChild(CheckboxTableComponent, { static: false })
   checkboxTable: CheckboxTableComponent;
 
@@ -41,9 +41,12 @@ export class DataprocessingComponent implements OnInit, AfterViewInit {
 
   onBtnPlot() {
     console.log(this.tableData.rows);
+    this.isLoading = true;
+    this.charts = [];
     this.ajaxService.plotChart(this.tableData.rows).subscribe(data => {
       this.charts = data.map(d => d.chart);
       this.isChartAvailable = true;
+      this.isLoading = false;
     });
   }
 
@@ -54,10 +57,10 @@ export class DataprocessingComponent implements OnInit, AfterViewInit {
       this.isDataAvailable = true;
     });
     this.formInitialValue = {
-      xField: "steak-0",
-      xFunc: "a",
-      yField: "pizza-1",
-      yFunc: "d"
+      xField: "order_date",
+      xFunc: "year",
+      yField: "profit",
+      yFunc: "sum"
     };
   }
 

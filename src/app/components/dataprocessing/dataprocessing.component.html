@@ -1,44 +1,49 @@
-<div *ngIf="isDataAvailable">
-  <app-visualform
-    (formValue)="onFormValue($event)"
-    [initialValue]="formInitialValue"
-    [formEntity]="formEntity"
-  ></app-visualform>
+<div class="page-content">
+  <div *ngIf="isDataAvailable">
+    <app-visualform
+      (formValue)="onFormValue($event)"
+      [initialValue]="formInitialValue"
+      [formEntity]="formEntity"
+    ></app-visualform>
 
-  <app-checkbox-table
-    [data]="tableData"
-    width="100%"
-    height="auto"
-  ></app-checkbox-table>
+    <app-checkbox-table
+      [data]="tableData"
+      width="100%"
+      height="auto"
+    ></app-checkbox-table>
 
-  <div class="btn-row">
-    <button
-      mat-raised-button
-      color="warn"
-      (click)="onBtnRemove($event)"
-      type="button"
-    >
-      Remove
-    </button>
+    <div class="btn-row">
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="onBtnRemove($event)"
+        type="button"
+      >
+        Remove
+      </button>
 
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="onBtnPlot($event)"
-      type="button"
-    >
-      Plot
-    </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onBtnPlot($event)"
+        type="button"
+      >
+        Plot
+      </button>
+    </div>
   </div>
-</div>
 
-<div *ngIf="isChartAvailable">
-  <mat-grid-list cols="charts.length>1? 2: 1" rowHeight="500px">
-    <mat-grid-tile *ngFor="let chart of charts">
-      <app-chart [data]="chart"></app-chart>
-    </mat-grid-tile>
-  </mat-grid-list>
-  <!-- <ng-container *ngFor="let chart of charts">
+  <div class="spinner" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="isChartAvailable">
+    <mat-grid-list cols="charts.length>1? 2: 1" rowHeight="500px">
+      <mat-grid-tile *ngFor="let chart of charts">
+        <app-chart [data]="chart"></app-chart>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <!-- <ng-container *ngFor="let chart of charts">
   
   </ng-container> -->
+  </div>
 </div>

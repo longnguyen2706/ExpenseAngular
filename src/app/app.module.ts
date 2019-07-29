@@ -5,7 +5,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { VisualizerComponent } from "./components/visualizer/visualizer.component";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ChartsModule } from "ng2-charts";
 import { CommonModule } from "@angular/common";
 import { ChartComponent } from "./components/chart/chart.component";
@@ -61,7 +61,8 @@ import { CheckboxTableComponent } from "./components/checkbox-table/checkbox-tab
     FlexLayoutModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatGridListModule
+    MatGridListModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
