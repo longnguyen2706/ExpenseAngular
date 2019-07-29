@@ -50,17 +50,21 @@ export class VisualizerAjax {
   getQuantityByMonth(): Observable<VisualizerData> {
     return this.http.get<VisualizerEntity>(urlMapping.quantityByMonth).pipe(
       map(entity => {
-        let chart: ChartEntity = entity.chart;
-        let chartData: ChartDataModel = {
-          chartData: this.processRow(chart.rows),
-          chartLabels: chart.columns.map(c => c.label)
-        };
-        return {
-          chart: chartData,
-          table: entity.table
-        };
+        return this.processVisualizerEntity(entity);
       })
     );
+  }
+
+  private processVisualizerEntity(entity: VisualizerEntity): VisualizerData {
+    let chart: ChartEntity = entity.chart;
+    let chartData: ChartDataModel = {
+      chartData: this.processRow(chart.rows),
+      chartLabels: chart.columns.map(c => c.label)
+    };
+    return {
+      chart: chartData,
+      table: entity.table
+    };
   }
 
   getAllRecords(): Observable<MatTableData> {
@@ -82,8 +86,16 @@ export class VisualizerAjax {
     return this.http.get<VisualFormEntity>(urlMapping.visualForm);
   }
 
-  plotChart(formValues: Array<FormValue>): Observable<any> {
-    return this.http.post<any>(urlMapping.plotChart, formValues);
+  plotChart(formValues: Array<FormValue>): Observable<Array<VisualizerData>> {
+    return this.http
+      .post<Array<VisualizerEntity>>(urlMapping.plotChart, formValues)
+      .pipe(
+        map(entities => {
+          let data = [];
+          entities.forEach(e => data.push(this.processVisualizerEntity(e)));
+          return data;
+        })
+      );
   }
 
   mock(): Observable<ChartDataModel> {

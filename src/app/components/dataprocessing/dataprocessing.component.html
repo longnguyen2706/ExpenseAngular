@@ -31,3 +31,14 @@
     </button>
   </div>
 </div>
+
+<div *ngIf="isChartAvailable">
+  <mat-grid-list cols="charts.length>1? 2: 1" rowHeight="500px">
+    <mat-grid-tile *ngFor="let chart of charts">
+      <app-chart [data]="chart"></app-chart>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!-- <ng-container *ngFor="let chart of charts">
+  
+  </ng-container> -->
+</div>

@@ -1,4 +1,25 @@
-<div class="chart">
-    <canvas baseChart [datasets]="data.chartData" [labels]="data.chartLabels" [options]="chartOptions" [colors]="chartColors"
-    [legend]="chartLegends" [chartType]="chartType" [plugins]="chartPlugins"></canvas>
+<div class="chart-wrapper">
+  <div class="chart-type">
+    <mat-form-field>
+      <mat-label>Chart type</mat-label>
+      <mat-select [(value)]="chartType">
+        <mat-option *ngFor="let type of types" [value]="type">
+          {{ type }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="chart">
+    <canvas
+      baseChart
+      [datasets]="data.chartData"
+      [labels]="data.chartLabels"
+      [options]="chartOptions"
+      [colors]="chartColors"
+      [legend]="chartLegends"
+      [chartType]="chartType"
+      [plugins]="chartPlugins"
+    ></canvas>
+  </div>
 </div>

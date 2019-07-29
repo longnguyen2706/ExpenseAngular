@@ -1,11 +1,13 @@
-<h4>Basic mat-select</h4>
+<h4>{{ title }}</h4>
 <mat-form-field>
-  <mat-label>Favorite food</mat-label>
-  <mat-select [(value)]="selected" (selectionChange) = "emitSelected($event)" required ="required">
+  <mat-label>{{ label }}</mat-label>
+  <mat-select
+    [(value)]="selected"
+    (selectionChange)="emitSelected($event)"
+    required="required"
+  >
     <mat-option *ngFor="let field of fieldOptions" [value]="field.value">
-      {{field.label}}
+      {{ field.label }}
     </mat-option>
   </mat-select>
 </mat-form-field>
-
-
